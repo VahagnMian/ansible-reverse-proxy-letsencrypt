@@ -1,0 +1,15 @@
+---
+#This example will automate jenkins and nexus artifactory provisioning
+- hosts: target_host
+  gather_facts: true
+  become: yes
+  roles:
+    - docker
+    #################
+    - docker-jenkins
+    - docker-nexus
+    #################
+    - nginx-install
+    - proxy-config
+    - letsencrypt
+

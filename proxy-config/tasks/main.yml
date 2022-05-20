@@ -1,0 +1,21 @@
+- name: Create Jenkins reverse-proxy file using Jinja2
+  template:
+    src: "{{ role_path }}/files/nginx.conf.j2"
+    dest: '/etc/nginx/conf.d/{{ server_name }}.conf'
+
+#- name: Create Nexus reverse-proxy file using Jinja2
+#  template:
+#    src: "{{ role_path }}/files/nginx.conf.j2"
+#    dest: '/etc/nginx/conf.d/{{ server_name_1 }}.conf'
+
+- name: Reload Nginx server
+  service:
+    name: nginx
+    state: reloaded
+
+- name: Restart Nginx server
+  service:
+    name: nginx
+    state: restarted
+
+

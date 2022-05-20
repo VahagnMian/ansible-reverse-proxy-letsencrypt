@@ -1,0 +1,21 @@
+---
+- name: Creates volume directory
+  file:
+    path: /home/ubuntu/jenkins_home
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: 0777
+
+
+- name: Create a Jenkins container
+  docker_container:
+    name: jenkins
+    image: jenkins/jenkins:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - /home/ubuntu/jenkins_home:/var/jenkins_home/
+
+
+

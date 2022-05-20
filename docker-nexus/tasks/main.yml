@@ -1,0 +1,22 @@
+---
+- name: Creates volume directory
+  file:
+    path: /home/ubuntu/nexus
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: 0777
+
+
+- name: Create a Nexus container
+  docker_container:
+    privileged: true
+    name: nexus
+    image: sonatype/nexus3
+    ports:
+      - "8082:8081"
+    volumes:
+      - /home/ubuntu/nexus:/nexus-data:rw
+
+
+
